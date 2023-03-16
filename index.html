@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Aim Accuracy</title>
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <script>
+      let currentId = 0;
+      const summonBall = (id) => {
+        const ball = document.createElement("div");
+   
+        const timeoutId = setTimeout(() => {
+          ball.remove();
+          summonBall(currentId++);
+        }, 15000);
+
+        ball.style.position = "absolute";
+        ball.style.left = Math.floor(Math.random() * 95) + "vw";
+        ball.style.top = Math.floor(Math.random() * 95) + "vh";
+        ball.classList.add("ball");
+        ball.classList.add("fade-out");
+        ball.id = "ball-" + id;
+        ball.onclick = () => {
+          const audio = new Audio("./pop.mp3");
+          audio.play();
+
+          clearTimeout(timeoutId);
+          summonBall(currentId++);
+          ball.remove();
+        };
+        document.body.appendChild(ball);
+      }
+
+      summonBall(currentId++);
+
+      const intervalId = setInterval(() => {
+        summonBall(currentId++);
+        if (currentId > 8) clearInterval(intervalId);
+      }, 1000);
+    </script>
+  </body>
+</html>
