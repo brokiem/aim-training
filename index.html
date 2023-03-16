@@ -9,6 +9,8 @@
 
   <body>
     <script>
+      const audio = new Audio("./pop.mp3");
+      
       let currentId = 0;
       const summonBall = (id) => {
         const ball = document.createElement("div");
@@ -25,7 +27,6 @@
         ball.classList.add("fade-out");
         ball.id = "ball-" + id;
         ball.onclick = () => {
-          const audio = new Audio("./pop.mp3");
           audio.play();
 
           clearTimeout(timeoutId);
